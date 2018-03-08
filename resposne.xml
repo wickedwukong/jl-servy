@@ -1,0 +1,38 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+   <soapenv:Body>
+      <ptb:ConfirmTransportationBooking xmlns:ptb="http://soa.johnlewispartnership.com/service/es/processTransportationBooking/v1">
+         <ApplicationArea creationDateTime="2018-03-06T14:40:29.870Z" sentDateTime="2018-03-06T14:40:29.870Z">
+            <Sender>ES-TransBooking-Sched</Sender>
+            <MessageID>23af6c1a-6f4d-4d15-be44-1c3084f4613e</MessageID>
+            <TrackingID>123</TrackingID>
+         </ApplicationArea>
+         <DataArea>
+            <Confirm responseCode="Error">
+               <OriginalApplicationArea creationDateTime="?" sentDateTime="?">
+                  <Channel>Online</Channel>
+                  <Sender>Online</Sender>
+                  <MessageID>123</MessageID>
+                  <TrackingID>123</TrackingID>
+               </OriginalApplicationArea>
+               <ptb:ServiceError errorCode="VALIDATION_FAILED" errorType="Business" errorDescription="Invalid service request, please check if all mandatory fields are present and all fields follow the restrictions in the interface definition"/>
+            </Confirm>
+            <jlebo:TransportationBooking xmlns:jlebo="http://soa.johnlewispartnership.com/schema/ebo/transportationbooking/v1">
+               <FulfilmentAreaTypeCode>DBS</FulfilmentAreaTypeCode>
+               <TransportationBookingLineItem>
+                  <CustomerOrderProductLineItem>
+                     <CustomerOrder>
+                        <CustomerOrderID>2000122232</CustomerOrderID>
+                        <OrderingCustomer>
+                           <CustomerID>123</CustomerID>
+                        </OrderingCustomer>
+                     </CustomerOrder>
+                     <CustomerOrderLineItemSequenceNumber>1</CustomerOrderLineItemSequenceNumber>
+                     <TotalRetailPriceAmount>10</TotalRetailPriceAmount>
+                  </CustomerOrderProductLineItem>
+                  <Quantity>1</Quantity>
+               </TransportationBookingLineItem>
+            </jlebo:TransportationBooking>
+         </DataArea>
+      </ptb:ConfirmTransportationBooking>
+   </soapenv:Body>
+</soapenv:Envelope>

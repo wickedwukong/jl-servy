@@ -1,0 +1,32 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v1="http://soa.johnlewispartnership.com/service/es/processTransportationBooking/v1" xmlns:v11="http://soa.johnlewispartnership.com/schema/ebo/transportationbooking/v1">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <v1:ScheduleTransportationBooking>
+         <ApplicationArea>
+            <Channel>Online</Channel>
+            <Sender>Online</Sender>
+            <MessageID>123</MessageID>
+            <TrackingID>123</TrackingID>
+         </ApplicationArea>
+         <DataArea>
+            <Schedule businessScenario="ScheduleTransportationBooking"/>
+            <v11:TransportationBooking>
+               <FulfilmentAreaTypeCode>DBS</FulfilmentAreaTypeCode>
+               <TransportationBookingLineItem>
+                  <CustomerOrderProductLineItem>
+                     <CustomerOrder>
+                        <CustomerOrderID>2000122232</CustomerOrderID>
+                        <OrderingCustomer>
+                           <CustomerID>123</CustomerID>
+                        </OrderingCustomer>
+                     </CustomerOrder>
+                     <CustomerOrderLineItemSequenceNumber>1</CustomerOrderLineItemSequenceNumber>
+                     <TotalRetailPriceAmount>10</TotalRetailPriceAmount>
+                  </CustomerOrderProductLineItem>
+                  <Quantity>1</Quantity>
+               </TransportationBookingLineItem>
+            </v11:TransportationBooking>
+         </DataArea>
+      </v1:ScheduleTransportationBooking>
+   </soapenv:Body>
+</soapenv:Envelope>
