@@ -2,6 +2,7 @@ defmodule Servy.Handler do
   def handle(request) do
     request
     |> parse
+    |> IO.inspect
     |> route
     |> format_response
   end
@@ -16,9 +17,9 @@ defmodule Servy.Handler do
   end
 
   def route(conv) do
-    # TODO: Create a new map that also has the response body:
-    conv = %{ conv | response_body: "Asad, Tom, Sri" }
+    route(conv, conv.path)
   end
+
 
   def format_response(conv) do
     # TODO: Use values in the map to create an HTTP response string:
@@ -27,7 +28,7 @@ defmodule Servy.Handler do
     Content-Type: text/html
     Content-Length: 20
 
-    Asad, Tom, Sri
+    #{conv.response_body}
     """
   end
 
