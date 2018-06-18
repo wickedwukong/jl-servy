@@ -25,6 +25,10 @@ defmodule Servy.Handler do
     conv = %{ conv | response_body: "Asad, Tom, Sri" }
   end
 
+  def route(conv, "GET", "/users" <> "/") do
+    route(conv, "GET", "/users")
+  end
+
   def route(conv, "GET", "/users/" <> id) do
     index = (id |> String.to_integer) - 1
 
