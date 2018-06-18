@@ -1,4 +1,5 @@
 defmodule Servy.Handler do
+  @users ["Asad", "Tom", "Sri"]
   def handle(request) do
     request
     |> parse
@@ -17,7 +18,21 @@ defmodule Servy.Handler do
   end
 
   def route(conv) do
+    route(conv, conv.method, conv.path)
+  end
+
+  def route(conv, "GET", "/users") do
     conv = %{ conv | response_body: "Asad, Tom, Sri" }
+  end
+
+  def route(conv, "GET", "/users/" <> id) do
+    index = (id |> String.to_integer) - 1
+
+    conv = %{ conv | response_body: Enum.at(@users, index) }
+  end
+
+  def route(conv, _, path) do
+    conv = %{ conv | response_body: "Not found" }
   end
 
 
@@ -26,7 +41,7 @@ defmodule Servy.Handler do
     """
     HTTP/1.1 200 OK
     Content-Type: text/html
-    Content-Length: 20
+    Content-Length: #{String.length(conv.response_body)}
 
     #{conv.response_body}
     """
@@ -55,3 +70,11 @@ Accept: */*
 
 response = Servy.Handler.handle(request)
 IO.puts response
+
+badRequest = """
+GET /foo HTTP/1.1
+Host: example.com
+User-Agent: ExampleBrowser/1.0
+Accept: */*
+
+"""
