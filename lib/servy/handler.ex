@@ -28,6 +28,11 @@ defmodule Servy.Handler do
     conv = %{ conv | response_body: Enum.at(@users, index) }
   end
 
+  def route(conv, "GET", "/hibernating/" <> time) do
+    time |> String.to_integer() |> :timer.sleep()
+    %{conv | response_body: "Awake!"}
+  end
+
   def route(conv, _, path) do
     conv = %{ conv | response_body: "Not found" }
   end
