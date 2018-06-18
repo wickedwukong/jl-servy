@@ -33,6 +33,12 @@ defmodule Servy.Handler do
     %{conv | response_body: "Awake!"}
   end
 
+
+  def route(conv, "GET", "/kaboom") do
+    raise "kaboom"
+  end
+
+
   def route(conv, _, path) do
     conv = %{ conv | response_body: "Not found" }
   end
