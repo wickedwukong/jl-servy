@@ -1,3 +1,5 @@
+import Servy.Parser, only: [parse: 1]
+
 defmodule Servy.Handler do
   @users ["Asad", "Tom", "Sri"]
   def handle(request) do
@@ -6,15 +8,6 @@ defmodule Servy.Handler do
     |> IO.inspect
     |> route
     |> format_response
-  end
-
-  def parse(request) do
-    [method, path | _] = request
-                             |> String.split("\n")
-                             |> List.first
-                             |> String.split(" ")
-
-    %{ method: method, path: path, response_body: "" }
   end
 
   def route(conv) do
@@ -43,42 +36,12 @@ defmodule Servy.Handler do
   def format_response(conv) do
     # TODO: Use values in the map to create an HTTP response string:
     """
-    HTTP/1.1 200 OK
-    Content-Type: text/html
-    Content-Length: #{String.length(conv.response_body)}
-
+    HTTP/1.1 200 OK\r
+    Content-Type: text/html\r
+    Content-Length: #{String.length(conv.response_body)}\r
+    \r
     #{conv.response_body}
     """
   end
 
 end
-
-request = """
-GET /users HTTP/1.1
-Host: example.com
-User-Agent: ExampleBrowser/1.0
-Accept: */*
-
-"""
-
-response = Servy.Handler.handle(request)
-IO.puts response
-
-anotherRequest = """
-GET /users/1 HTTP/1.1
-Host: example.com
-User-Agent: ExampleBrowser/1.0
-Accept: */*
-
-"""
-
-response = Servy.Handler.handle(request)
-IO.puts response
-
-badRequest = """
-GET /foo HTTP/1.1
-Host: example.com
-User-Agent: ExampleBrowser/1.0
-Accept: */*
-
-"""
